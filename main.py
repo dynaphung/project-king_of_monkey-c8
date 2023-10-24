@@ -99,15 +99,25 @@ def level2(event):
     canvas.create_image(1, 0, image=bg_level2, anchor="nw")
     
     #=============  LAND IMAGES =============
-    canvas.create_image(850,400, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(250,400, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(350,400, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(650,400, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(950,400, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(90,400, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(400,400, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(1000,400, image = stone_img, anchor="nw", tags = "platform")
 
     #============ ANERMY IMAGES ==============
-    canvas.create_image(400,490,image=fire_img, anchor="nw", tags="anermy")
-    canvas.create_image(450,690,image=fire_img, anchor="nw", tags="anermy")
-    canvas.create_image(500,290,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(200,490,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(250,490,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(350,490,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(550,530,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(700,490,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(790,400,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(790,400,image=fire_img, anchor="nw", tags="anermy")
 
     #============ FRUIT IMAGES ===============
-    canvas.create_image(680,550,image=banana_img,tags="score")
+    canvas.create_image(680,600,image=banana_img,tags="score")
     canvas.create_image(950,400,image=banana_img,tags="score")
 
     
