@@ -75,7 +75,9 @@ scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
 def level1(event):
     canvas.delete("all")
     canvas.create_image(0, 0, image=bg_level1, anchor="nw")
+    global background1, background2, player, score_id
     
+    score_id = canvas.create_text(170, 50, text=" score : " + str(score), font=("arsenal", 20, "bold"), fill="white",)
     #============= LAND IMAGES =============
     # canvas.create_image(300,100,image=land_image, anchor="nw",tags="platform")
     canvas.create_image(850,400, image = stone_img, anchor="nw", tags = "platform")
