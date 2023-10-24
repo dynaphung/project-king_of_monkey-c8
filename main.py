@@ -76,9 +76,9 @@ def level1(event):
     canvas.delete("all")
     canvas.create_image(0, 0, image=bg_level1, anchor="nw")
     
-    #============= LAND IMAGES =============
-    # canvas.create_image(300,100,image=land_image, anchor="nw",tags="platform")
+    #============= STONE IMAGES =============
     canvas.create_image(850,400, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(650,350, image = stone_img, anchor="nw", tags = "platform")
     
     #============ ANERMY IMAGES ==============
     canvas.create_image(400,480,image=fire_img, anchor="nw", tags="anermy")
@@ -86,6 +86,7 @@ def level1(event):
     #============ FRUIT IMAGES ===============
     canvas.create_image(680,550,image=banana_img,tags="score")
     canvas.create_image(950,400,image=banana_img,tags="score")
+
     #============= UNDER GROUND ============
     canvas.create_image(-50,600,image=ground_wall, anchor="nw", tags="plateform")
     canvas.create_image(350,600,image=ground_wall, anchor="nw", tags="plateform")
