@@ -56,6 +56,8 @@ key_img = PhotoImage(file="Images/key.png")
 # snow_bg = PhotoImage(file="Images/snow_bg.png")
 ice_stone = PhotoImage(file="Images/ice_stone.png")
 ice_thorn = PhotoImage(file="Images/ice_thorn.png")
+small_grass = PhotoImage(file="Images/small_grass.png")
+
 
 banana_img=PhotoImage(file="Images/banana.png")
 
@@ -92,9 +94,41 @@ def level1(event):
     
     #============= BACK SIGN ===============
     canvas.create_image(25, 10, image=back_img, anchor="nw", tags="back_all_levels")
-
+    
+    
+    
+    #============ LEVEL TWO ===============
 def level2(event):
     canvas.create_image(1, 0, image=bg_level2, anchor="nw")
+
+     #============= LAND IMAGES =============
+    # canvas.create_image(300,100,image=land_image, anchor="nw",tags="platform")
+    canvas.create_image(150,400, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(850,400, image = small_grass, anchor="nw", tags = "platform")
+
+    
+    #============ ANERMY IMAGES ==============
+    canvas.create_image(400,490,image=fire_img, anchor="nw", tags="anermy")
+    
+    #============ FRUIT IMAGES ===============
+    canvas.create_image(680,550,image=banana_img,tags="score")
+    canvas.create_image(950,400,image=banana_img,tags="score")
+    #============= UNDER GROUND ============
+    canvas.create_image(-50,600,image=ground_wall, anchor="nw", tags="plateform")
+    canvas.create_image(350,600,image=ground_wall, anchor="nw", tags="plateform")
+    
+    #============= BACK SIGN ===============
+    canvas.create_image(25, 10, image=back_img, anchor="nw", tags="back_all_levels")
+    
+
+
+
+
+
+
+
+
+
     canvas.create_image(25, 10, image=back_img, anchor="nw", tags="back_all_levels")
 
 def level3(event):
