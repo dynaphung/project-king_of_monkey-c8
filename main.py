@@ -1,7 +1,7 @@
 #============================ IMPORTS ============================
 import tkinter as tk
 from tkinter import * 
-from tkinter import Scrollbar
+# from tkinter import Scrollbar
 from PIL import ImageTk, Image
 
 #============================ CONSTANTS ============================
@@ -81,7 +81,7 @@ def level1(event):
     canvas.create_image(850,400, image = stone_img, anchor="nw", tags = "platform")
     
     #============ ANERMY IMAGES ==============
-    canvas.create_image(400,490,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(400,480,image=fire_img, anchor="nw", tags="anermy")
     
     #============ FRUIT IMAGES ===============
     canvas.create_image(680,550,image=banana_img,tags="score")
@@ -107,7 +107,7 @@ def selectPlayer():
     canvas.delete("all")
     # canvas.create_image(0, 1, image=bg, anchor="nw")
     canvas.create_image(0,0, image=bg, anchor="nw")
-    canvas.create_text(720, 100, text="CHOOSE PLAYER", font=("airal", 70, "bold"),fill="brown")
+    canvas.create_text(720, 100, text="CHOOSE PLAYER", font=("Halloween Slime", 70, "bold"),fill="brown")
                             #==== BACK HOME =====
     canvas.create_image(25, 10, image=back_img, anchor="nw", tags="back_home")
                             #==== PLAYER 1 =====
