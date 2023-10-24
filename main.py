@@ -86,6 +86,7 @@ def level1(event):
     #============ FRUIT IMAGES ===============
     canvas.create_image(680,550,image=banana_img,tags="score")
     canvas.create_image(950,400,image=banana_img,tags="score")
+
     #============= UNDER GROUND ============
     canvas.create_image(-50,600,image=ground_wall, anchor="nw", tags="plateform")
     canvas.create_image(350,600,image=ground_wall, anchor="nw", tags="plateform")
@@ -93,8 +94,31 @@ def level1(event):
     #============= BACK SIGN ===============
     canvas.create_image(25, 10, image=back_img, anchor="nw", tags="back_all_levels")
 
+    #============   LEVEL2    ==============
 def level2(event):
     canvas.create_image(1, 0, image=bg_level2, anchor="nw")
+    
+    #=============  LAND IMAGES =============
+    canvas.create_image(850,400, image = stone_img, anchor="nw", tags = "platform")
+
+    #============ ANERMY IMAGES ==============
+    canvas.create_image(400,490,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(450,690,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(500,290,image=fire_img, anchor="nw", tags="anermy")
+
+    #============ FRUIT IMAGES ===============
+    canvas.create_image(680,550,image=banana_img,tags="score")
+    canvas.create_image(950,400,image=banana_img,tags="score")
+
+    
+    #============= UNDER GROUND ============
+    canvas.create_image(-50,600,image=ground_wall, anchor="nw", tags="plateform")
+    canvas.create_image(350,600,image=ground_wall, anchor="nw", tags="plateform")
+
+
+
+
+
     canvas.create_image(25, 10, image=back_img, anchor="nw", tags="back_all_levels")
 
 def level3(event):
