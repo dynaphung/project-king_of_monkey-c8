@@ -1,7 +1,7 @@
 #============================ IMPORTS ============================
 import tkinter as tk
 from tkinter import * 
-from tkinter import Scrollbar
+# from tkinter import Scrollbar
 from PIL import ImageTk, Image
 
 #============================ CONSTANTS ============================
@@ -16,9 +16,12 @@ score=0
 #============================ MAIN WINDOW ============================
 window = tk.Tk()
 window.geometry(str(WINDOW_WIDTH)+"x"+str(WINDOW_HEIGHT))
-window.title("ADVANTURE GAME")
+window.title("KING OF MONKEY")
 frame = tk.Frame()
-canvas = tk.Canvas(frame)
+canvas = tk.Canvas(frame ,scrollregion= (0,0,4000,5000))
+
+
+
 
 
 #============================ IMAGES ============================
@@ -31,10 +34,66 @@ bg_level2=PhotoImage(file="Images/level2.png")
 bg_level3=PhotoImage(file="Images/level3.png")
 winter_bg=PhotoImage(file="Images/winter_bg.png")
 
+#___________________________________Condition:_____________________________________________
+NumberOfLive=0
+FoundKey=False
+IsWin=False
+levels=1
+
                 #=======PLAYER IMAGES===========
 player1_img=PhotoImage(file="Images/player1.png")
 player2_img=PhotoImage(file="Images/player2.png")
 player3_img=PhotoImage(file="Images/player3.png")
+
+#____________________________________monster image____________________________________________________
+# monster1_image=tk.PhotoImage(file="image/monster1.png")
+# monster1=canvas.create_image(650, 525, image=monster1_image)
+monster2_image=tk.PhotoImage(file="Images/monster2.png")
+monster2=canvas.create_image(400,435,image=monster2_image)
+# monster3_image=tk.PhotoImage(file="image/monster3.png")
+# monster3=canvas.create_image(200, 345, image=monster3_image)
+# monster4_image=tk.PhotoImage(file="image/monster4.png")
+# monster4=canvas.create_image(600, 255, image=monster4_image)
+# monster5_image=tk.PhotoImage(file="image/monster5.png")
+# monster5=canvas.create_image(450, 165, image=monster5_image)
+# bird_image=tk.PhotoImage(file="image/bird_monster.png")
+# bird_monster=canvas.create_image(550, 85, image=bird_image)
+monsters=[monster2,10,0]
+#___________________________________text_image_____________________________________________
+
+def move_monsters():
+    global monsters,NumberOfLive,IsWin,levels,Lose_banner,monster_speed
+    if NumberOfLive<3 and IsWin==False:
+        for n in range(len(monsters)):
+            position=canvas.coords(monsters[n][0])
+            monsterX = position[0]
+            if monsterX<=50 or monsterX>=650:
+                monsters[n][1] = -monsters[n][1]
+            canvas.move(monsters[n][0],monsters[n][1],monsters[n][2])
+            if (canvas.coords(monsters[n][0])[0]-50==canvas.coords(player)[0]+30 and canvas.coords(monsters[n][0])[1]==canvas.coords(player)[1]):
+                canvas.moveto(player,0,580)
+                NumberOfLive+=1
+                # sd_touched()
+                # count_number_ofLife()
+            if (canvas.coords(monsters[n][0])[0]+50==canvas.coords(player)[0]-30 and canvas.coords(monsters[n][0])[1]==canvas.coords(player)[1]):
+                canvas.moveto(player,0,580)
+                # NumberOfLive+=1
+                # sd_touched()
+                # count_number_ofLife()
+            if canvas.coords(monsters[n][0])[1]==canvas.coords(player)[1] and canvas.coords(player)[0]-30>=canvas.coords(monsters[n][0])[0]-50 and canvas.coords(monsters[n][0])[0]+50>=canvas.coords(player)[0]+30:
+                canvas.moveto(player,0,580)
+                # NumberOfLive+=1
+                # sd_touched()
+                # count_number_ofLife()
+        canvas.after(monster_speed,move_monsters)
+    if NumberOfLive==3:
+        canvas.moveto(Lose_banner,220,325)
+        # sd_game_over()
+        canvas.after(4000,restart_game)
+    move_monsters()
+
+
+
 
                 #=======SIGN IMAGES=============
 check=PhotoImage(file="Images/accept.png")
@@ -57,6 +116,7 @@ key_img = PhotoImage(file="Images/key.png")
 ice_stone = PhotoImage(file="Images/ice_stone.png")
 ice_thorn = PhotoImage(file="Images/ice_thorn.png")
 small_grass = PhotoImage(file="Images/small_grass.png")
+sea_imgs = PhotoImage(file="Images/sea1.png")
 
 
 banana_img=PhotoImage(file="Images/banana.png")
@@ -66,6 +126,14 @@ canvas_bg_level2 = canvas.create_image(0,0,image=bg_level1,anchor=NW)
 canvas_bg1_level2 = canvas.create_image(1340,0,image=bg_level1,anchor=NW)
 canvas_bg1_level2 = canvas.create_image(2400,0,image=bg_level1,anchor=NW)
 canvas_bg_level2 = canvas.create_image(3540,0,image=bg_level1,anchor=NW)
+
+
+
+
+# Auto-scrolling--------------------
+scrollbar_bottom = Scrollbar(window, orient='horizontal', command=canvas.xview)
+canvas.configure(xscrollcommand=scrollbar_bottom.set)
+scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
 
 # Auto-scrolling--------------------
 scrollbar_bottom = Scrollbar(window, orient='horizontal', command=canvas.xview)
@@ -83,11 +151,12 @@ def level1(event):
     canvas.create_image(850,400, image = stone_img, anchor="nw", tags = "platform")
     
     #============ ANERMY IMAGES ==============
-    canvas.create_image(400,490,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(400,480,image=fire_img, anchor="nw", tags="anermy")
     
     #============ FRUIT IMAGES ===============
     canvas.create_image(680,550,image=banana_img,tags="score")
     canvas.create_image(950,400,image=banana_img,tags="score")
+
     #============= UNDER GROUND ============
     canvas.create_image(-50,600,image=ground_wall, anchor="nw", tags="plateform")
     canvas.create_image(350,600,image=ground_wall, anchor="nw", tags="plateform")
@@ -99,33 +168,85 @@ def level1(event):
     
     #============ LEVEL TWO ===============
 def level2(event):
-    canvas.create_image(1, 0, image=bg_level2, anchor="nw")
+    global canvas_bg_level2 , player, score_id
+    # canvas.create_image(1, 0, image=bg_level2, anchor="nw")
+    #============================= BACKGROUND =====================
+    canvas_bg_level2 = canvas.create_image(0,0,image=bg_level2,anchor="nw")
+    canvas_bg_level2 = canvas.create_image(1340,0,image=bg_level2,anchor="nw")
+    canvas_bg_level2 = canvas.create_image(2400,0,image=bg_level2,anchor="nw")
+    canvas_bg_level2 = canvas.create_image(3540,0,image=bg_level2,anchor="nw")
+
+    # Auto-scrolling--------------------
+    scrollbar_bottom = Scrollbar(window, orient='horizontal', command=canvas.xview)
+    canvas.configure(xscrollcommand=scrollbar_bottom.set)
+    scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
+    
 
      #============= LAND IMAGES =============
-    # canvas.create_image(300,100,image=land_image, anchor="nw",tags="platform")
-    canvas.create_image(150,400, image = stone_img, anchor="nw", tags = "platform")
-    canvas.create_image(850,400, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(100,500, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(1250,550, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(100,100, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(350,400, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(500,300, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(900,500, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(700,150, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(1100,250, image = small_grass, anchor="nw", tags = "platform")
 
-    
+    canvas.create_image(1650,500, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(1650,100, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(2800,550, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(1900,400, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(2050,300, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(2250,150, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(2450,500, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(2650,250, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(2800,550, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(3000,550, image = small_grass, anchor="nw", tags = "platform")
+  
     #============ ANERMY IMAGES ==============
     canvas.create_image(400,490,image=fire_img, anchor="nw", tags="anermy")
-    
+    canvas.create_image(1100,490,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(1950,490,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(2650,490,image=fire_img, anchor="nw", tags="anermy")
+
     #============ FRUIT IMAGES ===============
-    canvas.create_image(680,550,image=banana_img,tags="score")
+    canvas.create_image(200,90,image=banana_img,tags="score")
+    canvas.create_image(300,590,image=banana_img,tags="score")
+    canvas.create_image(680,590,image=banana_img,tags="score")
+    canvas.create_image(750,590,image=banana_img,tags="score")
+    canvas.create_image(790,140,image=banana_img,tags="score")
     canvas.create_image(950,400,image=banana_img,tags="score")
+    canvas.create_image(1750,80,image=banana_img,tags="score")
+    canvas.create_image(2230,590,image=banana_img,tags="score")
+    canvas.create_image(2300,590,image=banana_img,tags="score")
+    canvas.create_image(2340,140,image=banana_img,tags="score")
+    canvas.create_image(2500,485,image=banana_img,tags="score")
+    canvas.create_image(2830,550,image=banana_img,tags="score")
+    canvas.create_image(3050,540,image=banana_img,tags="score")
+
+
     #============= UNDER GROUND ============
     canvas.create_image(-50,600,image=ground_wall, anchor="nw", tags="plateform")
     canvas.create_image(350,600,image=ground_wall, anchor="nw", tags="plateform")
+    canvas.create_image(1000,600,image=ground_wall, anchor="nw", tags="plateform")
+    canvas.create_image(2050,600,image=ground_wall, anchor="nw", tags="plateform")
+    canvas.create_image(3050,600,image=ground_wall, anchor="nw", tags="plateform")
+    
+    #============ SEA UNDER GROUND ====================
+    canvas.create_image(900,630,image=sea_imgs, anchor="nw", tags="plateform")
+    canvas.create_image(1540,630,image=sea_imgs, anchor="nw", tags="plateform")
+    canvas.create_image(1760,630,image=sea_imgs, anchor="nw", tags="plateform")
+    canvas.create_image(1970,630,image=sea_imgs, anchor="nw", tags="plateform")
+    canvas.create_image(2530,630,image=sea_imgs, anchor="nw", tags="plateform")
+    canvas.create_image(2730,630,image=sea_imgs, anchor="nw", tags="plateform")
+    canvas.create_image(2900,630,image=sea_imgs, anchor="nw", tags="plateform")
+    canvas.create_image(3600,630,image=sea_imgs, anchor="nw", tags="plateform")
+    canvas.create_image(3800,630,image=sea_imgs, anchor="nw", tags="plateform")
+
     
     #============= BACK SIGN ===============
     canvas.create_image(25, 10, image=back_img, anchor="nw", tags="back_all_levels")
     
-
-
-
-
-
-
 
 
 
@@ -141,21 +262,21 @@ def selectPlayer():
     canvas.delete("all")
     # canvas.create_image(0, 1, image=bg, anchor="nw")
     canvas.create_image(0,0, image=bg, anchor="nw")
-    canvas.create_text(720, 100, text="CHOOSE AVATAR", font=("airal", 70, "bold"),fill="yellow")
+    canvas.create_text(720, 100, text="CHOOSE PLAYER", font=("Halloween Slime", 70, "bold"),fill="brown")
                             #==== BACK HOME =====
     canvas.create_image(25, 10, image=back_img, anchor="nw", tags="back_home")
                             #==== PLAYER 1 =====
     canvas.create_image(320, 220, image=player1_img, anchor="nw", tags="player1")
     canvas.create_image(350, 450, image=bord_name, anchor="nw", tags="player1")
-    canvas.create_text(440, 485, text="NAVY", font=("airal", 25, "bold"), fill="#8D4004",tags="player1")
+    canvas.create_text(440, 485, text="Eli Na", font=("airal", 25, "bold"), fill="#8D4004",tags="player1")
                             #==== PLAYER 2 =====
     canvas.create_image(620, 220, image=player2_img, anchor="nw", tags="player2")
     canvas.create_image(650, 450, image=bord_name, anchor="nw", tags="player2")
-    canvas.create_text(740, 485, text="NARTIH", font=("airal", 25, "bold"), fill="#8D4004",tags="player2")
+    canvas.create_text(740, 485, text="NA RITH", font=("airal", 25, "bold"), fill="#8D4004",tags="player2")
                             # ==== PLAYER 3 =====
     canvas.create_image(920, 220, image=player3_img, anchor="nw", tags="player3")
     canvas.create_image(950, 450, image=bord_name, anchor="nw", tags="player3")
-    canvas.create_text(1040, 485, text="BOYLOY", font=("airal", 25, "bold"), fill="#8D4004",tags="player3")
+    canvas.create_text(1040, 485, text="SANOK", font=("airal", 25, "bold"), fill="#8D4004",tags="player3")
     
                             #==== NEXT =====
     canvas.create_image(1260, 610, image=next_img, anchor="nw", tags="next")
