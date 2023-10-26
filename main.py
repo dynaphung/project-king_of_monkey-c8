@@ -1,7 +1,6 @@
 #============================ IMPORTS ============================
 import tkinter as tk
 from tkinter import * 
-# from tkinter import Scrollbar
 from PIL import ImageTk, Image
 
 #============================ CONSTANTS ============================
@@ -18,10 +17,7 @@ window = tk.Tk()
 window.geometry(str(WINDOW_WIDTH)+"x"+str(WINDOW_HEIGHT))
 window.title("KING OF MONKEY")
 frame = tk.Frame()
-canvas = tk.Canvas(frame ,scrollregion= (0,0,4000,5000))
-
-
-
+canvas = tk.Canvas(frame, scrollregion= (0,0,4000,5000))
 
 
 #============================ IMAGES ============================
@@ -31,7 +27,7 @@ bg=PhotoImage(file="Images/bg_choose-hero.png")
 bg_level=PhotoImage(file="Images/bg_level.png")
 bg_level1=PhotoImage(file="Images/level1.png")
 bg_level2=PhotoImage(file="Images/level2.png")
-bg_level3=PhotoImage(file="Images/level3.png")
+bg_level3=PhotoImage(file="Images/bg_level3.png")
 winter_bg=PhotoImage(file="Images/winter_bg.png")
 
 #___________________________________Condition:_____________________________________________
@@ -107,8 +103,10 @@ help_board = PhotoImage(file="Images/help.png")
 
                 #IMAGES IN GAMES
 ground_wall=PhotoImage(file="Images/grass.png")
+ground_wall_level3=PhotoImage(file="Images/ground.png")
 land_image=PhotoImage(file="Images/land.png")
 stone_img=PhotoImage(file="Images/stone.png")
+grass1_img=PhotoImage(file="Images/grass1.png")
 wall_img=PhotoImage(file="Images/big_stone.png")
 fire_img=PhotoImage(file="Images/fire.png")
 key_img = PhotoImage(file="Images/key.png")
@@ -139,6 +137,11 @@ scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
 scrollbar_bottom = Scrollbar(window, orient='horizontal', command=canvas.xview)
 canvas.configure(xscrollcommand=scrollbar_bottom.set)
 scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
+banana_img=PhotoImage(file="Images/banana.png")
+trap_img=PhotoImage(file="Images/trap.png")
+snake_img=PhotoImage(file="Images/snake.png")
+door_img=PhotoImage(file="Images/door.png")
+help1_img=PhotoImage(file="Images/help1.png")
 
 #=========================== ALL LEVELS =======================
 
@@ -146,9 +149,9 @@ def level1(event):
     canvas.delete("all")
     canvas.create_image(0, 0, image=bg_level1, anchor="nw")
     
-    #============= LAND IMAGES =============
-    # canvas.create_image(300,100,image=land_image, anchor="nw",tags="platform")
+    #============= STONE IMAGES =============
     canvas.create_image(850,400, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(650,350, image = stone_img, anchor="nw", tags = "platform")
     
     #============ ANERMY IMAGES ==============
     canvas.create_image(400,480,image=fire_img, anchor="nw", tags="anermy")
@@ -257,6 +260,218 @@ def level3(event):
     canvas.create_image(1, 0, image=bg_level3, anchor="nw")
     canvas.create_image(25, 10, image=back_img, anchor="nw", tags="back_all_levels")
 
+#======================= ADD AUTOSCROLLING-BAR ================================
+                #=========== BACKGROUND =====================
+    canvas_bg_level3 = canvas.create_image(0,0,image=bg_level3,anchor=NW)
+    canvas_bg_level3 = canvas.create_image(1340,0,image=bg_level3,anchor=NW)
+    canvas_bg_level3 = canvas.create_image(2400,0,image=bg_level3,anchor=NW)
+    canvas_bg_level3 = canvas.create_image(3540,0,image=bg_level3,anchor=NW)
+                #=========== Auto-scrolling ========================
+    scrollbar_bottom = Scrollbar(window, orient='horizontal', command=canvas.xview)
+    canvas.configure(xscrollcommand=scrollbar_bottom.set)
+    scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
+
+#======================= ADD IMAGE IM LEVEL3 GAME ================================
+    #============= STONE IMAGES =============
+    canvas.create_image(90,330, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(150,100, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(390,220, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(650,300, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(690,80, image = grass1_img, anchor="nw", tags = "platform")
+
+    canvas.create_image(950,300, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(1150,100, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(1320,250, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(1650,300, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(1690,80, image = grass1_img, anchor="nw", tags = "platform")
+
+    canvas.create_image(1950,300, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(2150,100, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(2320,250, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(2650,300, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(2690,80, image = grass1_img, anchor="nw", tags = "platform")
+    
+    canvas.create_image(3000,300, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(3140,100, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(3310,370, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(3640,300, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(3470,100, image = grass1_img, anchor="nw", tags = "platform")
+   
+    canvas.create_image(3800,50, image = grass1_img, anchor="nw", tags = "platform")
+    
+    #============ ANERMY IMAGES (LOSING WHEN TOUCH ANERMY)==============
+    canvas.create_image(340,510,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(760,510,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(830,510,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(2810,510,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(3900,460,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(3300,460,image=fire_img, anchor="nw", tags="anermy")
+
+    canvas.create_image(230,390,image=trap_img,tags="anermy")
+    canvas.create_image(530,280,image=trap_img,tags="anermy")
+
+    #============ FRUIT IMAGES ===============
+    canvas.create_image(690,350,image=banana_img,tags="score")
+    canvas.create_image(745,350,image=banana_img,tags="score")
+    canvas.create_image(800,350,image=banana_img,tags="score")
+    
+    canvas.create_image(740,130,image=banana_img,tags="score")
+    canvas.create_image(795,130,image=banana_img,tags="score")
+    canvas.create_image(850,130,image=banana_img,tags="score")
+    
+    canvas.create_image(200,150,image=banana_img,tags="score")
+    canvas.create_image(255,150,image=banana_img,tags="score")
+    canvas.create_image(305,150,image=banana_img,tags="score")
+
+    canvas.create_image(100,580,image=banana_img,tags="score")
+    canvas.create_image(150,580,image=banana_img,tags="score")
+    canvas.create_image(200,580,image=banana_img,tags="score")
+    canvas.create_image(250,580,image=banana_img,tags="score")
+    canvas.create_image(300,580,image=banana_img,tags="score")
+    
+    canvas.create_image(470,580,image=banana_img,tags="score")
+    canvas.create_image(520,580,image=banana_img,tags="score")
+    canvas.create_image(570,580,image=banana_img,tags="score")
+    canvas.create_image(620,580,image=banana_img,tags="score")
+    canvas.create_image(670,580,image=banana_img,tags="score")
+    canvas.create_image(720,580,image=banana_img,tags="score")
+
+    canvas.create_image(150,380,image=banana_img,tags="score")
+    canvas.create_image(190,380,image=banana_img,tags="score")
+
+    canvas.create_image(450,280,image=banana_img,tags="score")
+    canvas.create_image(490,280,image=banana_img,tags="score")
+
+    canvas.create_image(990,350,image=banana_img,tags="score")
+    canvas.create_image(1030,350,image=banana_img,tags="score")
+    canvas.create_image(1070,350,image=banana_img,tags="score")
+
+    canvas.create_image(1040,580,image=snake_img,tags="anermy")
+    canvas.create_image(1090,580,image=banana_img,tags="score")
+    canvas.create_image(1140,580,image=banana_img,tags="score")
+    canvas.create_image(1190,580,image=banana_img,tags="score")
+    canvas.create_image(1240,580,image=banana_img,tags="score")
+    canvas.create_image(1290,580,image=banana_img,tags="score")
+    canvas.create_image(1340,580,image=banana_img,tags="score")
+    canvas.create_image(1390,580,image=snake_img,tags="anermy")
+    canvas.create_image(1440,580,image=snake_img,tags="anermy")
+    canvas.create_image(1490,580,image=banana_img,tags="score")
+    canvas.create_image(1540,580,image=banana_img,tags="score")
+    canvas.create_image(1590,580,image=banana_img,tags="score")
+    canvas.create_image(1640,580,image=banana_img,tags="score")
+    canvas.create_image(1690,580,image=banana_img,tags="score")
+    canvas.create_image(1690,580,image=banana_img,tags="score")
+    canvas.create_image(1780,530,image=fire_img,tags="anermy")
+    canvas.create_image(1860,580,image=banana_img,tags="score")
+    canvas.create_image(1910,580,image=banana_img,tags="score")
+    canvas.create_image(1960,580,image=trap_img,tags="anermy")
+    canvas.create_image(2010,580,image=banana_img,tags="score")
+    canvas.create_image(2070,580,image=banana_img,tags="score")
+    canvas.create_image(2120,580,image=banana_img,tags="score")
+    canvas.create_image(2170,580,image=trap_img,tags="anermy")
+    canvas.create_image(2220,580,image=banana_img,tags="score")
+    canvas.create_image(2280,580,image=banana_img,tags="score")
+    canvas.create_image(2340,530,image=fire_img,tags="anermy")
+    canvas.create_image(2390,580,image=banana_img,tags="score")
+    canvas.create_image(2440,580,image=banana_img,tags="score")
+    canvas.create_image(2490,580,image=banana_img,tags="score")
+    canvas.create_image(2540,580,image=banana_img,tags="score")
+    canvas.create_image(2590,580,image=banana_img,tags="score")
+    canvas.create_image(2650,580,image=snake_img,tags="anermy")
+    canvas.create_image(2710,580,image=banana_img,tags="score")
+
+    canvas.create_image(1200,150,image=banana_img,tags="score")
+    canvas.create_image(1250,150,image=banana_img,tags="score")
+    canvas.create_image(1300,150,image=banana_img,tags="score")
+
+    canvas.create_image(3880,90, image=banana_img,tags="score")
+    canvas.create_image(3930,90, image=door_img, tags = "")
+
+    canvas.create_image(2730,350, image=banana_img, tags = "score")
+    canvas.create_image(2780,350, image=key_img, tags = "")
+    
+    canvas.create_image(1370,300,image=banana_img,tags="score")
+    canvas.create_image(1420,300,image=banana_img,tags="score")
+    canvas.create_image(1460,300,image=trap_img,tags="anermy")
+
+    canvas.create_image(1370,300,image=banana_img,tags="score")
+    canvas.create_image(1420,300,image=banana_img,tags="score")
+    canvas.create_image(1460,300,image=trap_img,tags="anermy")
+
+    canvas.create_image(1700,350,image=banana_img,tags="score")
+    canvas.create_image(1750,350,image=banana_img,tags="score")
+    canvas.create_image(1800,350,image=banana_img,tags="score")
+
+    canvas.create_image(1740,120,image=banana_img,tags="score")
+    canvas.create_image(1780,120,image=banana_img,tags="score")
+    canvas.create_image(1840,120,image=snake_img,tags="anermy")
+
+    canvas.create_image(2030,350,image=banana_img,tags="score")
+
+    canvas.create_image(2250,150,image=banana_img,tags="score")
+
+    canvas.create_image(2420,290,image=banana_img,tags="score")
+
+    canvas.create_image(3100,350,image=banana_img,tags="score")
+
+    canvas.create_image(3240,150,image=banana_img,tags="score")
+
+    canvas.create_image(3410,420,image=banana_img,tags="score")
+
+    canvas.create_image(3740,350,image=banana_img,tags="score")
+
+    canvas.create_image(3570,150,image=banana_img,tags="score")
+
+    canvas.create_image(2790,130,image=banana_img,tags="score")
+
+    canvas.create_image(2940,580,image=trap_img,tags="anermy")
+    canvas.create_image(2990,580,image=banana_img,tags="score")
+    canvas.create_image(3040,580,image=banana_img,tags="score")
+    canvas.create_image(3090,580,image=banana_img,tags="score")
+    canvas.create_image(3140,580,image=trap_img,tags="anermy")
+    canvas.create_image(3190,580,image=banana_img,tags="score")
+    canvas.create_image(3240,580,image=banana_img,tags="score")
+    canvas.create_image(3240,580,image=banana_img,tags="score")
+
+    canvas.create_image(3420,580,image=trap_img,tags="anermy")
+    canvas.create_image(3470,580,image=banana_img,tags="score")
+    canvas.create_image(3520,580,image=banana_img,tags="score")
+    canvas.create_image(3570,580,image=banana_img,tags="score")
+    canvas.create_image(3630,580,image=snake_img,tags="anermy")
+    canvas.create_image(3680,580,image=banana_img,tags="score")
+    canvas.create_image(3730,580,image=banana_img,tags="score")
+    canvas.create_image(3780,580,image=banana_img,tags="score")
+    canvas.create_image(3830,580,image=trap_img,tags="anermy")
+    canvas.create_image(3880,580,image=banana_img,tags="score")
+
+    #============= UNDER GROUND ============
+    canvas.create_image(80,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(240,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(510,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(670,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(990,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(1150,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(1310,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(1470,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(1600,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(1760,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(1920,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(2080,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(2240,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(2400,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(2560,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(2720,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(2970,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(3130,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(3290,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(3450,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(3610,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(3770,620,image=ground_wall_level3,tags="plateform")
+    canvas.create_image(3930,620,image=ground_wall_level3,tags="plateform")
+    
+    #============= BACK SIGN ===============
+    canvas.create_image(25, 10, image=back_img, anchor="nw", tags="back_all_levels")
+
 #============================ SELECT PLAYER ============================
 def selectPlayer():
     canvas.delete("all")
@@ -316,8 +531,8 @@ def backTolevel(event):
     allLevels()
 
 def help(event):
-    canvas.create_image(1, 0, image=winter_bg, anchor="nw")
-    canvas.create_image(380,100, image = help_board, anchor="nw")
+    # canvas.create_image(1, 0, image=winter_bg, anchor="nw")
+    canvas.create_image(0,0, image = help1_img, anchor="nw")
     canvas.create_image(25, 10, image=back_img, anchor="nw", tags="back_home")
 def start(event):
     selectPlayer()
