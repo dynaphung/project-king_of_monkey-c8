@@ -60,16 +60,30 @@ help_board = PhotoImage(file="Images/help.png")
 ground_wall=PhotoImage(file="Images/grass.png")
 ground_wall_level3=PhotoImage(file="Images/ground.png")
 land_image=PhotoImage(file="Images/land.png")
+grass1_img=PhotoImage(file="Images/grass1.png")
+
+
+small_grass=PhotoImage(file="Images/grass_L2.png")
 stone_img=PhotoImage(file="Images/stone.png")
 key_img = PhotoImage(file="Images/key.png")
 door_img= PhotoImage(file="Images/door_img.png")
 dengerous_land=PhotoImage(file="Images/land_have_enermy.png")
 banana_img=PhotoImage(file="Images/banana.png")
 lose_img=PhotoImage(file="Images/lose.png")
+
+
                 #=====ENERMY IMAGES ==========
 fire_img=PhotoImage(file="Images/fire.png")
 snake_img=PhotoImage(file="Images/snake_img.png")
+sea_imgs=PhotoImage(file="Images/sea.png")
+# fire_img=PhotoImage(file="Images/fire.png")
+# key_img = PhotoImage(file="Images/key.png")
 
+# banana_img=PhotoImage(file="Images/banana.png")
+trap_img=PhotoImage(file="Images/trap.png")
+# snake_img=PhotoImage(file="Images/snake.png")
+# door_img=PhotoImage(file="Images/door.png")
+help1_img=PhotoImage(file="Images/help1.png")
 
 # ===========scroll==============
 def scroll_bg_img():
@@ -83,20 +97,14 @@ def scroll_bg_img_1():
 
     if canvas.coords('all')[0]<-5000:
         canvas.coords('all',5000,0)
-grass1_img=PhotoImage(file="Images/grass1.png")
-# wall_img=PhotoImage(file="Images/big_stone.png")
-fire_img=PhotoImage(file="Images/fire.png")
-key_img = PhotoImage(file="Images/key.png")
-# snow_bg = PhotoImage(file="Images/snow_bg.png")
-# ice_stone = PhotoImage(file="Images/ice_stone.png")
-# ice_thorn = PhotoImage(file="Images/ice_thorn.png")
-banana_img=PhotoImage(file="Images/banana.png")
-trap_img=PhotoImage(file="Images/trap.png")
-snake_img=PhotoImage(file="Images/snake.png")
-door_img=PhotoImage(file="Images/door.png")
-help1_img=PhotoImage(file="Images/help1.png")
+
+
 
 #=========================== ALL LEVELS =======================
+
+
+
+
 
 def level1(event):
     global canvas_bg_level1 , player_id, score_id 
@@ -116,8 +124,6 @@ def level1(event):
     canvas_bg_level1 = canvas.create_image(2400,0,image=bg_level1, anchor="nw")
     canvas_bg_level1 = canvas.create_image(3540,0,image=bg_level1, anchor="nw")
     
-    
-    # score_id = canvas.create_text(170, 50, text=" score : " + str(score), font=("arsenal", 20, "bold"), fill="white",)
     #============= LAND IMAGES =============
     
     canvas.create_image(850,400, image = stone_img, anchor="nw", tags = "plateform")
@@ -178,33 +184,111 @@ def level1(event):
     score_id = canvas.create_text(1200, 50, text=" score : " + str(score), font=("arsenal", 20, "bold"), fill="white",)
     window.after(TIMED_LOOP, gravity)
 
-    #============   LEVEL2    ==============
-def level2(event):
-    canvas.create_image(1, 0, image=bg_level2, anchor="nw")
-    
-    #=============  LAND IMAGES =============
-    canvas.create_image(850,400, image = stone_img, anchor="nw", tags = "platform")
 
+
+
+
+
+
+
+
+    #============ LEVEL TWO ===============
+def level2(event):
+    global canvas_bg_level2 , player_id, score_id 
+    
+    canvas.delete("all")
+    # canvas.create_image(1, 0, image=bg_level2, anchor="nw")
+    #============================= BACKGROUND =====================
+    canvas_bg_level2 = canvas.create_image(0,0,image=bg_level2,anchor="nw")
+    canvas_bg_level2 = canvas.create_image(1340,0,image=bg_level2,anchor="nw")
+    canvas_bg_level2 = canvas.create_image(2400,0,image=bg_level2,anchor="nw")
+    canvas_bg_level2 = canvas.create_image(3540,0,image=bg_level2,anchor="nw")
+
+    # Auto-scrolling--------------------
+    scrollbar_bottom = Scrollbar(window, orient='horizontal', command=canvas.xview)
+    canvas.configure(xscrollcommand=scrollbar_bottom.set)
+    scrollbar_bottom.place(relx=0, rely=1, relwidth=1, anchor='sw')
+    
+    #============= LAND IMAGES =============
+    canvas.create_image(100,500, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(1250,550, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(100,100, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(350,400, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(500,300, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(900,500, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(700,150, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(1100,250, image = small_grass, anchor="nw", tags = "platform")
+
+    canvas.create_image(1650,500, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(1650,100, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(2800,550, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(1900,400, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(2050,300, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(2250,150, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(2450,500, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(2650,250, image = small_grass, anchor="nw", tags = "platform")
+    canvas.create_image(2800,550, image = stone_img, anchor="nw", tags = "platform")
+    canvas.create_image(3000,550, image = small_grass, anchor="nw", tags = "platform")
+  
     #============ ANERMY IMAGES ==============
     canvas.create_image(400,490,image=fire_img, anchor="nw", tags="anermy")
-    canvas.create_image(450,690,image=fire_img, anchor="nw", tags="anermy")
-    canvas.create_image(500,290,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(1100,490,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(1950,490,image=fire_img, anchor="nw", tags="anermy")
+    canvas.create_image(2650,490,image=fire_img, anchor="nw", tags="anermy")
 
     #============ FRUIT IMAGES ===============
-    canvas.create_image(680,550,image=banana_img,tags="score")
+    canvas.create_image(200,90,image=banana_img,tags="score")
+    canvas.create_image(300,590,image=banana_img,tags="score")
+    canvas.create_image(680,590,image=banana_img,tags="score")
+    canvas.create_image(750,590,image=banana_img,tags="score")
+    canvas.create_image(790,140,image=banana_img,tags="score")
     canvas.create_image(950,400,image=banana_img,tags="score")
+    canvas.create_image(1750,80,image=banana_img,tags="score")
+    canvas.create_image(2230,590,image=banana_img,tags="score")
+    canvas.create_image(2300,590,image=banana_img,tags="score")
+    canvas.create_image(2340,140,image=banana_img,tags="score")
+    canvas.create_image(2500,485,image=banana_img,tags="score")
+    canvas.create_image(2830,550,image=banana_img,tags="score")
+    canvas.create_image(3050,540,image=banana_img,tags="score")
+    canvas.create_image(3350,540,image=banana_img,tags="score")
 
-    
     #============= UNDER GROUND ============
     canvas.create_image(-50,600,image=ground_wall, anchor="nw", tags="plateform")
     canvas.create_image(350,600,image=ground_wall, anchor="nw", tags="plateform")
+    canvas.create_image(1000,600,image=ground_wall, anchor="nw", tags="plateform")
+    canvas.create_image(2050,600,image=ground_wall, anchor="nw", tags="plateform")
+    canvas.create_image(3050,600,image=ground_wall, anchor="nw", tags="plateform")
+    
+    #============ SEA UNDER GROUND ====================
+    canvas.create_image(900,630,image=sea_imgs, anchor="nw", tags="plateform")
+    canvas.create_image(1540,630,image=sea_imgs, anchor="nw", tags="plateform")
+    canvas.create_image(1760,630,image=sea_imgs, anchor="nw", tags="plateform")
+    canvas.create_image(1970,630,image=sea_imgs, anchor="nw", tags="plateform")
+    canvas.create_image(2530,630,image=sea_imgs, anchor="nw", tags="plateform")
+    canvas.create_image(2730,630,image=sea_imgs, anchor="nw", tags="plateform")
+    canvas.create_image(2900,630,image=sea_imgs, anchor="nw", tags="plateform")
+    canvas.create_image(3600,630,image=sea_imgs, anchor="nw", tags="plateform")
+    canvas.create_image(3800,630,image=sea_imgs, anchor="nw", tags="plateform")
 
+    #============= BACK SIGN ===============
     canvas.create_image(25, 10, image=back_img, anchor="nw", tags="back_all_levels")
+    
+    player_id=canvas.create_image(10,250, image =player, anchor="nw",tags="players1")
+    
+    score_id = canvas.create_text(1200, 50, text=" score : " + str(score), font=("arsenal", 20, "bold"), fill="white",)
+    window.after(TIMED_LOOP, gravity)
+
+
+
+
+
+
 
 def level3(event):
+    global canvas_bg_level3 , player_id, score_id 
     canvas.delete("all")
-    canvas.create_image(1, 0, image=bg_level3, anchor="nw")
-    canvas.create_image(25, 10, image=back_img, anchor="nw", tags="back_all_levels")
+    # canvas.create_image(1, 0, image=bg_level3, anchor="nw")
+    # canvas.create_image(25, 10, image=back_img, anchor="nw", tags="back_all_levels")
 
 #======================= ADD AUTOSCROLLING-BAR ================================
                 #=========== BACKGROUND =====================
@@ -219,31 +303,31 @@ def level3(event):
 
 #======================= ADD IMAGE IM LEVEL3 GAME ================================
     #============= STONE IMAGES =============
-    canvas.create_image(90,330, image = grass1_img, anchor="nw", tags = "platform")
-    canvas.create_image(150,100, image = grass1_img, anchor="nw", tags = "platform")
-    canvas.create_image(390,220, image = grass1_img, anchor="nw", tags = "platform")
-    canvas.create_image(650,300, image = grass1_img, anchor="nw", tags = "platform")
-    canvas.create_image(690,80, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(110,330, image = grass1_img, anchor="nw", tags = "plateform")
+    canvas.create_image(150,100, image = grass1_img, anchor="nw", tags = "plateform")
+    canvas.create_image(390,220, image = grass1_img, anchor="nw", tags = "plateform")
+    canvas.create_image(650,300, image = grass1_img, anchor="nw", tags = "plateform")
+    canvas.create_image(690,80, image = grass1_img, anchor="nw", tags = "plateform")
 
-    canvas.create_image(950,300, image = grass1_img, anchor="nw", tags = "platform")
-    canvas.create_image(1150,100, image = grass1_img, anchor="nw", tags = "platform")
-    canvas.create_image(1320,250, image = grass1_img, anchor="nw", tags = "platform")
-    canvas.create_image(1650,300, image = grass1_img, anchor="nw", tags = "platform")
-    canvas.create_image(1690,80, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(950,300, image = grass1_img, anchor="nw", tags = "plateform")
+    canvas.create_image(1150,100, image = grass1_img, anchor="nw", tags = "plateform")
+    canvas.create_image(1320,250, image = grass1_img, anchor="nw", tags = "plateform")
+    canvas.create_image(1650,300, image = grass1_img, anchor="nw", tags = "plateform")
+    canvas.create_image(1690,80, image = grass1_img, anchor="nw", tags = "plateform")
 
-    canvas.create_image(1950,300, image = grass1_img, anchor="nw", tags = "platform")
-    canvas.create_image(2150,100, image = grass1_img, anchor="nw", tags = "platform")
-    canvas.create_image(2320,250, image = grass1_img, anchor="nw", tags = "platform")
-    canvas.create_image(2650,300, image = grass1_img, anchor="nw", tags = "platform")
-    canvas.create_image(2690,80, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(1950,300, image = grass1_img, anchor="nw", tags = "plateform")
+    canvas.create_image(2150,100, image = grass1_img, anchor="nw", tags = "plateform")
+    canvas.create_image(2320,250, image = grass1_img, anchor="nw", tags = "plateform")
+    canvas.create_image(2650,300, image = grass1_img, anchor="nw", tags = "plateform")
+    canvas.create_image(2690,80, image = grass1_img, anchor="nw", tags = "plateform")
     
-    canvas.create_image(3000,300, image = grass1_img, anchor="nw", tags = "platform")
-    canvas.create_image(3140,100, image = grass1_img, anchor="nw", tags = "platform")
-    canvas.create_image(3310,370, image = grass1_img, anchor="nw", tags = "platform")
-    canvas.create_image(3640,300, image = grass1_img, anchor="nw", tags = "platform")
-    canvas.create_image(3470,100, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(3000,300, image = grass1_img, anchor="nw", tags = "plateform")
+    canvas.create_image(3140,100, image = grass1_img, anchor="nw", tags = "plateform")
+    canvas.create_image(3310,370, image = grass1_img, anchor="nw", tags = "plateform")
+    canvas.create_image(3640,300, image = grass1_img, anchor="nw", tags = "plateform")
+    canvas.create_image(3470,100, image = grass1_img, anchor="nw", tags = "plateform")
    
-    canvas.create_image(3800,50, image = grass1_img, anchor="nw", tags = "platform")
+    canvas.create_image(3800,50, image = grass1_img, anchor="nw", tags = "plateform")
     
     #============ ANERMY IMAGES (LOSING WHEN TOUCH ANERMY)==============
     canvas.create_image(340,510,image=fire_img, anchor="nw", tags="anermy")
@@ -417,6 +501,11 @@ def level3(event):
     
     #============= BACK SIGN ===============
     canvas.create_image(25, 10, image=back_img, anchor="nw", tags="back_all_levels")
+    
+    player_id=canvas.create_image(10,250, image =player, anchor="nw",tags="players1")
+    
+    score_id = canvas.create_text(1200, 50, text=" score : " + str(score), font=("arsenal", 20, "bold"), fill="white",)
+    window.after(TIMED_LOOP, gravity)
 
 #============================ SELECT PLAYER ============================
 def selectPlayer():
@@ -437,10 +526,9 @@ def selectPlayer():
                             # ==== PLAYER 3 =====
     canvas.create_image(920, 220, image=player3_img, anchor="nw", tags="player3")
     canvas.create_image(950, 450, image=bord_name, anchor="nw", tags="player3")
-    canvas.create_text(1040, 485, text="SANOK", font=("airal", 25, "bold"), fill="#8D4004",tags="player3")
+    canvas.create_text(1040, 485, text="SANOK", font=("halloween", 25, "bold"), fill="#8D4004",tags="player3")
     
                             #==== NEXT =====
-    
 
 #PLAYER 1  
 def player1(event):
@@ -583,7 +671,7 @@ def check_movement_frutis():
 def check_movement_key():
     coord = canvas.coords(player_id)
     platforms = canvas.find_withtag("key")
-    overlap = canvas.find_overlapping(coord[0], coord[1], coord[0] + player1_img.width(), (coord[1]) + player1_img.height())    
+    overlap = canvas.find_overlapping(coord[0], coord[1], coord[0] + player.width(), coord[1] + player.height())    
     for platform in platforms:
         if platform in overlap:
             return platform
@@ -592,7 +680,7 @@ def check_movement_key():
 def check_movement_door():
     coord = canvas.coords(player_id)
     platforms = canvas.find_withtag("door")
-    overlap = canvas.find_overlapping(coord[0], coord[1], coord[0] + player1_img.width(), (coord[1]) + player1_img.height())    
+    overlap = canvas.find_overlapping(coord[0], coord[1], coord[0] + player.width(), (coord[1]) + player.height())    
     for platform in platforms:
         if platform in overlap:
             return platform
@@ -621,7 +709,7 @@ def move():
         if "Right" in keyPressed:
             x += SPEED
             scroll_bg_img()
-        if "space" in keyPressed and not check_movement(0, GRAVITY_FORCE, True):
+        if "s" in keyPressed and not check_movement(0, GRAVITY_FORCE, True):
             jump(JUMP_FORCE)
         if check_movement(x):
             canvas.move(player_id, x, 0)
@@ -638,8 +726,6 @@ def stop_move(event):
     global keyPressed
     if event.keysym in keyPressed:
         keyPressed.remove(event.keysym)
-
-
 
 def check_more():
     global score, isKey, isRun
@@ -693,10 +779,7 @@ canvas.tag_bind("level2","<Button-1>",level2)
 canvas.tag_bind("level3","<Button-1>",level3)
 
 #========================= REMOTES =================
-
-
 home()
-
 #========================= DISPLAY WINDOW =================
 canvas.pack(expand=True, fill="both")
 frame.pack(expand=True, fill="both")
