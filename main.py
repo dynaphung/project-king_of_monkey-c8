@@ -226,6 +226,8 @@ def level2(event):
     canvas.create_image(2500,485,image=banana_img,tags="score")
     canvas.create_image(2830,550,image=banana_img,tags="score")
     canvas.create_image(3050,540,image=banana_img,tags="score")
+    canvas.create_image(3350,540,image=banana_img,tags="score")
+
 
 
     #============= UNDER GROUND ============
